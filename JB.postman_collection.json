@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "e917011e-ed5e-4d0d-a2b3-a3f4311e494f",
+		"name": "JB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\" : \"4\",\n    \"password\": \"password\",\n    \"role\" : \"REVIEWER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNjUxMzMxMTIwLCJleHAiOjE2NTE0MTc1MjAsInVzZXJSb2xlIjoiUkVWSUVXRVIifQ.4YNzoImevnEQngvdUi2uyLaPP4EMTYWOAt-4KTK_CA9PNDJgQcRBrSeBgxY0dDVoVz02mt5Au0-FU49DwefwUg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\" : \"4\",\n    \"newPassword\": \"password1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/change-password",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\" : \"4\",\n    \"password\": \"password1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin resource",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNjUxMzMxMTIwLCJleHAiOjE2NTE0MTc1MjAsInVzZXJSb2xlIjoiUkVWSUVXRVIifQ.4YNzoImevnEQngvdUi2uyLaPP4EMTYWOAt-4KTK_CA9PNDJgQcRBrSeBgxY0dDVoVz02mt5Au0-FU49DwefwUg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/internal/admin",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"internal",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user resource",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNjUxMzMxMTIwLCJleHAiOjE2NTE0MTc1MjAsInVzZXJSb2xlIjoiUkVWSUVXRVIifQ.4YNzoImevnEQngvdUi2uyLaPP4EMTYWOAt-4KTK_CA9PNDJgQcRBrSeBgxY0dDVoVz02mt5Au0-FU49DwefwUg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/internal/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"internal",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reviewer resource",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNjUxMzMxMTkwLCJleHAiOjE2NTE0MTc1OTAsInVzZXJSb2xlIjoiUkVWSUVXRVIifQ.UbSLRNPWyJVep4PAqIuwaWlCrbc5HbogmQj5oyKdao_1O5TJRXiVwZwejquDh1sufCPrcr5fQEWBn2SVJu6Kww",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/internal/reviewer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"internal",
+						"reviewer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
