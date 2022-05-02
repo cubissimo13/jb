@@ -50,7 +50,6 @@ class UserServiceImpl(
             val jwtToken = tokenService.generateJwtToken(user)
             logger.info("Successful login user $userName")
             return JwtResponse(
-                userId = user.id!!,
                 userName = user.userName,
                 jwtToken = jwtToken
             )
