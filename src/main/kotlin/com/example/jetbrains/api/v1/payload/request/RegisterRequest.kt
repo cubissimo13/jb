@@ -11,5 +11,6 @@ data class RegisterRequest(
     @ValidPassword
     val password: String,
 
+    @NotBlank
     val role: UserRole
 )

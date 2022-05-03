@@ -1,7 +1,6 @@
 package com.example.jetbrains.service
 
 import com.example.jetbrains.model.UserModel
-import com.example.jetbrains.model.UserRole
 
 /**
  * Interface that provide methods for operation with JWT token

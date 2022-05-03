@@ -17,7 +17,7 @@ class ExceptionHelper {
     fun unauthorizedHandler(exception: WrongPasswordException): ResponseEntity<ErrorResponse> {
         logger.info("${exception.message} ${exception.userName}")
         return ResponseEntity(
-            ErrorResponse(HttpStatus.UNAUTHORIZED.value(), "Wrong password"), HttpStatus.UNAUTHORIZED
+            ErrorResponse(status = HttpStatus.UNAUTHORIZED.value(), error = "Wrong credential"), HttpStatus.UNAUTHORIZED
         )
     }
 
@@ -25,14 +25,15 @@ class ExceptionHelper {
     fun unauthorizedHandler(exception: WrongUserException): ResponseEntity<ErrorResponse> {
         logger.info("${exception.message} ${exception.userName}")
         return ResponseEntity(
-            ErrorResponse(HttpStatus.BAD_REQUEST.value(), "User already exist"), HttpStatus.BAD_REQUEST
+            ErrorResponse(status = HttpStatus.BAD_REQUEST.value(), error = "User already exist"), HttpStatus.BAD_REQUEST
         )
     }
 
     @ExceptionHandler(value = [RuntimeException::class])
     fun allExceptionHandler(exception: RuntimeException): ResponseEntity<ErrorResponse> {
+        logger.error(exception.stackTraceToString())
         return ResponseEntity(
-            ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Ooops! something wrong"),
+            ErrorResponse(status = HttpStatus.INTERNAL_SERVER_ERROR.value(), error = "Ooops! something wrong"),
             HttpStatus.INTERNAL_SERVER_ERROR
         )
     }

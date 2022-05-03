@@ -1,11 +1,13 @@
 package com.example.jetbrains.security
 
 import com.example.jetbrains.service.TokenService
+import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
+@Component
 class AuthorizationFilter(private val tokenService: TokenService) : OncePerRequestFilter() {
     private val anyOneAccessEndpoint = setOf("/api/v1/auth/register", "/api/v1/auth/login")
 

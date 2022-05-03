@@ -9,8 +9,10 @@ import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Service
 import java.util.Date
 
+@Service
 class TokenServiceImpl(private val blackListRepository: BlackListRepository) : TokenService {
 
     @Value("\${jetbrains.app.jwt.secret}")

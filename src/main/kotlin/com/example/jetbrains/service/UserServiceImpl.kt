@@ -12,7 +12,9 @@ import com.example.jetbrains.repository.BlackListRepository
 import com.example.jetbrains.repository.UserRepository
 import org.mindrot.jbcrypt.BCrypt
 import org.slf4j.LoggerFactory
+import org.springframework.stereotype.Service
 
+@Service
 class UserServiceImpl(
     private val blackListRepository: BlackListRepository,
     private val userRepository: UserRepository,
