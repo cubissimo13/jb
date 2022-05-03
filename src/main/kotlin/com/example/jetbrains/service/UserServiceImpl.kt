@@ -5,10 +5,10 @@ import com.example.jetbrains.api.v1.payload.response.JwtResponse
 import com.example.jetbrains.api.v1.payload.response.RegisterResponse
 import com.example.jetbrains.exciption.WrongPasswordException
 import com.example.jetbrains.exciption.WrongUserException
-import com.example.jetbrains.model.ExpiredToken
+import com.example.jetbrains.model.redis.ExpiredTokenCache
 import com.example.jetbrains.model.UserModel
 import com.example.jetbrains.model.UserRole
-import com.example.jetbrains.repository.BlackListRepository
+import com.example.jetbrains.repository.redis.BlackListCacheRepository
 import com.example.jetbrains.repository.UserRepository
 import org.mindrot.jbcrypt.BCrypt
 import org.slf4j.LoggerFactory
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserServiceImpl(
-    private val blackListRepository: BlackListRepository,
+    private val blackListCacheRepository: BlackListCacheRepository,
     private val userRepository: UserRepository,
     private val tokenService: TokenService
 ) : UserService {
@@ -62,7 +62,7 @@ class UserServiceImpl(
 
     private fun addOldTokenToBlackList(jwtToken: String) {
         val ttl = tokenService.getExpirationDate(jwtToken)
-        blackListRepository.save(ExpiredToken(jwtToken, ttl))
+        blackListCacheRepository.save(ExpiredTokenCache(jwtToken, ttl))
         logger.info("Token added to blacklist with ttl $ttl")
     }
 }

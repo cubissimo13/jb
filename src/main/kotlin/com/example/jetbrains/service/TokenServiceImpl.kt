@@ -1,7 +1,7 @@
 package com.example.jetbrains.service
 
 import com.example.jetbrains.model.UserModel
-import com.example.jetbrains.repository.BlackListRepository
+import com.example.jetbrains.repository.redis.BlackListCacheRepository
 import com.example.jetbrains.security.AUTH_TOKEN_START
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jws
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 import java.util.Date
 
 @Service
-class TokenServiceImpl(private val blackListRepository: BlackListRepository) : TokenService {
+class TokenServiceImpl(private val blackListCacheRepository: BlackListCacheRepository) : TokenService {
 
     @Value("\${jetbrains.app.jwt.secret}")
     lateinit var jwtSecret: String
@@ -38,7 +38,7 @@ class TokenServiceImpl(private val blackListRepository: BlackListRepository) : T
     override fun validateToken(jwtToken: String): Boolean {
         return try {
             val parseClaimsJwt = parseClaims(jwtToken)
-            (parseClaimsJwt.body.expiration > Date() && !blackListRepository.existsById(jwtToken))
+            (parseClaimsJwt.body.expiration > Date() && !blackListCacheRepository.existsById(jwtToken))
         } catch (e: JwtException) {
             false
         }
