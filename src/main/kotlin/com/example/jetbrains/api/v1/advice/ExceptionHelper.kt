@@ -1,8 +1,9 @@
 package com.example.jetbrains.api.v1.advice
 
 import com.example.jetbrains.api.v1.payload.response.ErrorResponse
+import com.example.jetbrains.exciption.UserExistException
 import com.example.jetbrains.exciption.WrongPasswordException
-import com.example.jetbrains.exciption.WrongUserException
+import com.example.jetbrains.exciption.UserNotFoundException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -21,8 +22,16 @@ class ExceptionHelper {
         )
     }
 
-    @ExceptionHandler(value = [WrongUserException::class])
-    fun unauthorizedHandler(exception: WrongUserException): ResponseEntity<ErrorResponse> {
+    @ExceptionHandler(value = [UserNotFoundException::class])
+    fun unauthorizedHandler(exception: UserNotFoundException): ResponseEntity<ErrorResponse> {
+        logger.info("${exception.message} ${exception.userName}")
+        return ResponseEntity(
+            ErrorResponse(status = HttpStatus.BAD_REQUEST.value(), error = "User not found"), HttpStatus.BAD_REQUEST
+        )
+    }
+
+    @ExceptionHandler(value = [UserExistException::class])
+    fun unauthorizedHandler(exception: UserExistException): ResponseEntity<ErrorResponse> {
         logger.info("${exception.message} ${exception.userName}")
         return ResponseEntity(
             ErrorResponse(status = HttpStatus.BAD_REQUEST.value(), error = "User already exist"), HttpStatus.BAD_REQUEST

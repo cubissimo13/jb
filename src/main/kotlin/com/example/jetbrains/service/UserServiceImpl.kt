@@ -3,8 +3,9 @@ package com.example.jetbrains.service
 import com.example.jetbrains.api.v1.payload.response.ChangeResponse
 import com.example.jetbrains.api.v1.payload.response.JwtResponse
 import com.example.jetbrains.api.v1.payload.response.RegisterResponse
+import com.example.jetbrains.exciption.UserExistException
 import com.example.jetbrains.exciption.WrongPasswordException
-import com.example.jetbrains.exciption.WrongUserException
+import com.example.jetbrains.exciption.UserNotFoundException
 import com.example.jetbrains.model.redis.ExpiredTokenCache
 import com.example.jetbrains.model.UserModel
 import com.example.jetbrains.model.UserRole
@@ -25,7 +26,7 @@ class UserServiceImpl(
 
     override fun registerUser(userName: String, password: String, role: UserRole): RegisterResponse {
         if (userRepository.existsByUserName(userName)) {
-            throw WrongUserException("User already exist", userName)
+            throw UserExistException("User already exist", userName)
         }
         val saltedHash = BCrypt.hashpw(password, BCrypt.gensalt())
         val userModel = UserModel(id = null, userName = userName, password = saltedHash, role = role)
@@ -37,7 +38,7 @@ class UserServiceImpl(
     override fun changePassword(newPassword: String, authHeader: String): ChangeResponse {
         val jwtToken = tokenService.getJwtTokenFromHeader(authHeader)
         val userName = tokenService.getUserName(jwtToken)
-        val user = userRepository.findUserModelByUserName(userName) ?: throw WrongUserException("Not found", userName)
+        val user = userRepository.findUserModelByUserName(userName) ?: throw UserNotFoundException("Not found", userName)
         val saltedHash = BCrypt.hashpw(newPassword, BCrypt.gensalt())
         user.password = saltedHash
         userRepository.save(user)
@@ -47,8 +48,8 @@ class UserServiceImpl(
     }
 
     override fun authenticate(userName: String, password: String): JwtResponse {
-        val user = userRepository.findUserModelByUserName(userName)
-        if (user != null && BCrypt.checkpw(password, user.password)) {
+        val user = userRepository.findUserModelByUserName(userName) ?: throw UserNotFoundException("Not found", userName)
+        if (BCrypt.checkpw(password, user.password)) {
             val jwtToken = tokenService.generateJwtToken(user)
             logger.info("Successful login user $userName")
             return JwtResponse(
@@ -56,7 +57,7 @@ class UserServiceImpl(
                 jwtToken = jwtToken
             )
         } else {
-            throw WrongPasswordException(message = "Given wrong password", userName = userName)
+            throw WrongPasswordException(message = "Wrong credential", userName = userName)
         }
     }
 
