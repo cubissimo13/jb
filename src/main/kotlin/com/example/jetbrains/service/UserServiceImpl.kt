@@ -3,6 +3,7 @@ package com.example.jetbrains.service
 import com.example.jetbrains.api.v1.payload.response.ChangeResponse
 import com.example.jetbrains.api.v1.payload.response.JwtResponse
 import com.example.jetbrains.api.v1.payload.response.RegisterResponse
+import com.example.jetbrains.exciption.SamePasswordException
 import com.example.jetbrains.exciption.UserExistException
 import com.example.jetbrains.exciption.WrongPasswordException
 import com.example.jetbrains.exciption.UserNotFoundException
@@ -39,6 +40,7 @@ class UserServiceImpl(
         val jwtToken = tokenService.getJwtTokenFromHeader(authHeader)
         val userName = tokenService.getUserName(jwtToken)
         val user = userRepository.findUserModelByUserName(userName) ?: throw UserNotFoundException("Not found", userName)
+        if (BCrypt.checkpw(newPassword, user.password)) throw SamePasswordException("Same password for user", userName)
         val saltedHash = BCrypt.hashpw(newPassword, BCrypt.gensalt())
         user.password = saltedHash
         userRepository.save(user)

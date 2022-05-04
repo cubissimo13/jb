@@ -1,6 +1,7 @@
 package com.example.jetbrains.api.v1.advice
 
 import com.example.jetbrains.api.v1.payload.response.ErrorResponse
+import com.example.jetbrains.exciption.SamePasswordException
 import com.example.jetbrains.exciption.UserExistException
 import com.example.jetbrains.exciption.WrongPasswordException
 import com.example.jetbrains.exciption.UserNotFoundException
@@ -19,6 +20,14 @@ class ExceptionHelper {
         logger.info("${exception.message} ${exception.userName}")
         return ResponseEntity(
             ErrorResponse(status = HttpStatus.UNAUTHORIZED.value(), error = "Wrong credential"), HttpStatus.UNAUTHORIZED
+        )
+    }
+
+    @ExceptionHandler(value = [SamePasswordException::class])
+    fun unauthorizedHandler(exception: SamePasswordException): ResponseEntity<ErrorResponse> {
+        logger.info("${exception.message} ${exception.userName}")
+        return ResponseEntity(
+            ErrorResponse(status = HttpStatus.BAD_REQUEST.value(), error = "Same password"), HttpStatus.BAD_REQUEST
         )
     }
 
