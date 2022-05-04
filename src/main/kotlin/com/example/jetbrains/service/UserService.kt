@@ -3,7 +3,6 @@ package com.example.jetbrains.service
 import com.example.jetbrains.api.v1.payload.response.ChangeResponse
 import com.example.jetbrains.api.v1.payload.response.JwtResponse
 import com.example.jetbrains.api.v1.payload.response.RegisterResponse
-import com.example.jetbrains.model.UserRole
 
 /**
  * Interface that provide methods for operation with user
@@ -16,7 +15,7 @@ interface UserService {
      * @param role     - Role for authentication
      * @return Result message
      */
-    fun registerUser(userName: String, password: String, role: UserRole): RegisterResponse
+    fun registerUser(userName: String, password: String, role: String): RegisterResponse
 
     /**
      * Change password for registered user

@@ -1,7 +1,7 @@
 package com.example.jetbrains.service
 
 import com.example.jetbrains.model.UserModel
-import com.example.jetbrains.model.UserRole
+import com.example.jetbrains.model.UserRoleModel
 import com.example.jetbrains.model.redis.UserRoleCache
 import com.example.jetbrains.repository.UserRepository
 import com.example.jetbrains.repository.redis.UserRoleCacheRepository
@@ -17,18 +17,18 @@ class UserRoleCacheServiceImpl(
     @Value("\${jetbrains.app.userRole.cache.ttl.min}")
     lateinit var cacheTtl: String
 
-    override fun getUserRole(userName: String): UserRole {
+    override fun getUserRole(userName: String): UserRoleModel {
         val cachedUserRole = userRoleCacheRepository.findById(userName)
         return if (cachedUserRole.isPresent) {
             cachedUserRole.get().userRole
         } else {
-            val role = userRepository.getRole(userName)
+            val role = userRepository.findUserByName(userName)?.role ?: throw IllegalStateException()
             userRoleCacheRepository.save(UserRoleCache(userName, role, cacheTtl.toLong()))
             role
         }
     }
 
-    override fun changeUserRole(user: UserModel, userRole: UserRole) {
+    override fun changeUserRole(user: UserModel, userRole: UserRoleModel) {
         userRoleCacheRepository.save(UserRoleCache(user.userName, userRole, cacheTtl.toLong()))
     }
 }

@@ -1,6 +1,5 @@
 package com.example.jetbrains.api.v1.payload.request
 
-import com.example.jetbrains.model.UserRole
 import com.example.jetbrains.validation.ValidPassword
 import javax.validation.constraints.NotBlank
 
@@ -12,5 +11,5 @@ data class RegisterRequest(
     val password: String,
 
     @NotBlank
-    val role: UserRole
+    val role: String
 )

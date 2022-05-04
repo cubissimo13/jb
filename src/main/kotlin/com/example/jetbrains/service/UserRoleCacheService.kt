@@ -1,9 +1,9 @@
 package com.example.jetbrains.service
 
 import com.example.jetbrains.model.UserModel
-import com.example.jetbrains.model.UserRole
+import com.example.jetbrains.model.UserRoleModel
 
 interface UserRoleCacheService {
-    fun getUserRole(userName: String): UserRole
-    fun changeUserRole(user: UserModel, userRole: UserRole)
+    fun getUserRole(userName: String): UserRoleModel
+    fun changeUserRole(user: UserModel, userRole: UserRoleModel)
 }

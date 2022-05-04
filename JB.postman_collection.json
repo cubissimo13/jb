@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"userName\": \"666\",\n    \"password\": \"Password1!\",\n    \"role\": \"ADMIN\"\n}",
+							"raw": "{\n    \"userName\": \"111\",\n    \"password\": \"Password1!\",\n    \"role\": \"REVIEWER\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -47,7 +47,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NjYiLCJpYXQiOjE2NTE1MTI2MjMsImV4cCI6MTY1MTU5OTAyM30.09An5vOZ8xOkTF298Wy0k1ZgmQHQpWpgzw9jUOIvpW7uRQ59qldDnFag8yDstte4Lz12QtfagE-gk7JkvXIV6Q",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMTEiLCJpYXQiOjE2NTE2ODgwODUsImV4cCI6MTY1MTc3NDQ4NX0.4wjaxDenn_TYh0v2hVShyAYrsgEcwnRfUJmsnc9ESwcZbui5tMGaBte0B8XKyuLqrK_lCmtVNVVOLdOeQ-mkqQ",
 									"type": "string"
 								}
 							]
@@ -56,7 +56,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"newPassword\": \"Password222!\"\n}",
+							"raw": "{\n    \"newPassword\": \"Password2!\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -86,7 +86,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"userName\": \"666\",\n    \"password\": \"Password1!\"\n}",
+							"raw": "{\n    \"userName\": \"111\",\n    \"password\": \"Password1!\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -119,7 +119,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NjYiLCJpYXQiOjE2NTE1MTI2MjMsImV4cCI6MTY1MTU5OTAyM30.09An5vOZ8xOkTF298Wy0k1ZgmQHQpWpgzw9jUOIvpW7uRQ59qldDnFag8yDstte4Lz12QtfagE-gk7JkvXIV6Q",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMjIiLCJpYXQiOjE2NTE2OTAzNzEsImV4cCI6MTY1MTc3Njc3MX0.0Ksi5nRrSd484JkKMxDmNgFbGLPwNwZzLcsH_E7Cy7WLOj7iTiV3ttKGoZYk-dGakdA5zPweZgx8BpdCiF-B6w",
 							"type": "string"
 						}
 					]
@@ -150,7 +150,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NjYiLCJpYXQiOjE2NTE1MTI2MjMsImV4cCI6MTY1MTU5OTAyM30.09An5vOZ8xOkTF298Wy0k1ZgmQHQpWpgzw9jUOIvpW7uRQ59qldDnFag8yDstte4Lz12QtfagE-gk7JkvXIV6Q",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMjIiLCJpYXQiOjE2NTE2OTAzNzEsImV4cCI6MTY1MTc3Njc3MX0.0Ksi5nRrSd484JkKMxDmNgFbGLPwNwZzLcsH_E7Cy7WLOj7iTiV3ttKGoZYk-dGakdA5zPweZgx8BpdCiF-B6w",
 							"type": "string"
 						}
 					]
@@ -181,7 +181,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NjYiLCJpYXQiOjE2NTE1MTI2MjMsImV4cCI6MTY1MTU5OTAyM30.09An5vOZ8xOkTF298Wy0k1ZgmQHQpWpgzw9jUOIvpW7uRQ59qldDnFag8yDstte4Lz12QtfagE-gk7JkvXIV6Q",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMjIiLCJpYXQiOjE2NTE2OTAzNzEsImV4cCI6MTY1MTc3Njc3MX0.0Ksi5nRrSd484JkKMxDmNgFbGLPwNwZzLcsH_E7Cy7WLOj7iTiV3ttKGoZYk-dGakdA5zPweZgx8BpdCiF-B6w",
 							"type": "string"
 						}
 					]
