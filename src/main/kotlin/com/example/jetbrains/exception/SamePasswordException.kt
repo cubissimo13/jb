@@ -1,6 +1,6 @@
-package com.example.jetbrains.exciption
+package com.example.jetbrains.exception
 
-class UserExistException(
+class SamePasswordException(
     override val message: String,
     val userName: String
 ) : RuntimeException()

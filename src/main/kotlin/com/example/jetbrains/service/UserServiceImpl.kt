@@ -3,10 +3,10 @@ package com.example.jetbrains.service
 import com.example.jetbrains.api.v1.payload.response.ChangeResponse
 import com.example.jetbrains.api.v1.payload.response.JwtResponse
 import com.example.jetbrains.api.v1.payload.response.RegisterResponse
-import com.example.jetbrains.exciption.SamePasswordException
-import com.example.jetbrains.exciption.UserExistException
-import com.example.jetbrains.exciption.UserNotFoundException
-import com.example.jetbrains.exciption.WrongPasswordException
+import com.example.jetbrains.exception.SamePasswordException
+import com.example.jetbrains.exception.UserExistException
+import com.example.jetbrains.exception.UserNotFoundException
+import com.example.jetbrains.exception.WrongPasswordException
 import com.example.jetbrains.model.UserModel
 import com.example.jetbrains.model.redis.ExpiredTokenCache
 import com.example.jetbrains.repository.UserRepository
@@ -15,6 +15,7 @@ import com.example.jetbrains.repository.redis.BlackListCacheRepository
 import org.mindrot.jbcrypt.BCrypt
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserServiceImpl(
@@ -26,6 +27,7 @@ class UserServiceImpl(
 
     private val logger = LoggerFactory.getLogger(UserServiceImpl::class.simpleName)
 
+    @Transactional
     override fun registerUser(userName: String, password: String, role: String): RegisterResponse {
         if (userRepository.existByUserName(userName)) {
             throw UserExistException("User already exist", userName)
@@ -38,6 +40,7 @@ class UserServiceImpl(
         return RegisterResponse("Successful registered user $userName")
     }
 
+    @Transactional
     override fun changePassword(newPassword: String, authHeader: String): ChangeResponse {
         val jwtToken = tokenService.getJwtTokenFromHeader(authHeader)
         val userName = tokenService.getUserName(jwtToken)

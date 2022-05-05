@@ -7,8 +7,8 @@ import org.springframework.web.servlet.HandlerInterceptor
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-class AuthenticationInterceptor(private val userRoleCacheService: UserRoleCacheService) : HandlerInterceptor {
-    private val logger = LoggerFactory.getLogger(AuthenticationInterceptor::class.simpleName)
+class AuthorizationInterceptor(private val userRoleCacheService: UserRoleCacheService) : HandlerInterceptor {
+    private val logger = LoggerFactory.getLogger(AuthorizationInterceptor::class.simpleName)
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         val handlerMethod = handler as? HandlerMethod

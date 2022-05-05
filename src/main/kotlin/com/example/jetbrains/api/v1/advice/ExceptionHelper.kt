@@ -1,10 +1,10 @@
 package com.example.jetbrains.api.v1.advice
 
 import com.example.jetbrains.api.v1.payload.response.ErrorResponse
-import com.example.jetbrains.exciption.SamePasswordException
-import com.example.jetbrains.exciption.UserExistException
-import com.example.jetbrains.exciption.WrongPasswordException
-import com.example.jetbrains.exciption.UserNotFoundException
+import com.example.jetbrains.exception.SamePasswordException
+import com.example.jetbrains.exception.UserExistException
+import com.example.jetbrains.exception.UserNotFoundException
+import com.example.jetbrains.exception.WrongPasswordException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -17,7 +17,7 @@ class ExceptionHelper {
 
     @ExceptionHandler(value = [WrongPasswordException::class])
     fun unauthorizedHandler(exception: WrongPasswordException): ResponseEntity<ErrorResponse> {
-        logger.info("${exception.message} ${exception.userName}")
+        logger.error("${exception.message} ${exception.userName}")
         return ResponseEntity(
             ErrorResponse(status = HttpStatus.UNAUTHORIZED.value(), error = "Wrong credential"), HttpStatus.UNAUTHORIZED
         )
@@ -25,7 +25,7 @@ class ExceptionHelper {
 
     @ExceptionHandler(value = [SamePasswordException::class])
     fun unauthorizedHandler(exception: SamePasswordException): ResponseEntity<ErrorResponse> {
-        logger.info("${exception.message} ${exception.userName}")
+        logger.error("${exception.message} ${exception.userName}")
         return ResponseEntity(
             ErrorResponse(status = HttpStatus.BAD_REQUEST.value(), error = "Same password"), HttpStatus.BAD_REQUEST
         )
@@ -33,7 +33,7 @@ class ExceptionHelper {
 
     @ExceptionHandler(value = [UserNotFoundException::class])
     fun unauthorizedHandler(exception: UserNotFoundException): ResponseEntity<ErrorResponse> {
-        logger.info("${exception.message} ${exception.userName}")
+        logger.error("${exception.message} ${exception.userName}")
         return ResponseEntity(
             ErrorResponse(status = HttpStatus.BAD_REQUEST.value(), error = "User not found"), HttpStatus.BAD_REQUEST
         )
@@ -41,7 +41,7 @@ class ExceptionHelper {
 
     @ExceptionHandler(value = [UserExistException::class])
     fun unauthorizedHandler(exception: UserExistException): ResponseEntity<ErrorResponse> {
-        logger.info("${exception.message} ${exception.userName}")
+        logger.error("${exception.message} ${exception.userName}")
         return ResponseEntity(
             ErrorResponse(status = HttpStatus.BAD_REQUEST.value(), error = "User already exist"), HttpStatus.BAD_REQUEST
         )

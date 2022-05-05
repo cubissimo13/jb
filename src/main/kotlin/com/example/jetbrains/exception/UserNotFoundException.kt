@@ -1,4 +1,4 @@
-package com.example.jetbrains.exciption
+package com.example.jetbrains.exception
 
 class UserNotFoundException(
     override val message: String,
