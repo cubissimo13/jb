@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/v1/internal")
 class InternalController {
     @GetMapping("/admin")
-    @AccessRole(AccessLevel.ADMIN)
+    @AccessRole(AccessLevel.ADMIN_ACCESS)
     fun getAdminResource(): ResourceResponse {
         return ResourceResponse("There is admins resource")
     }
 
     @GetMapping("/reviewer")
-    @AccessRole(AccessLevel.REVIEWER)
+    @AccessRole(AccessLevel.REVIEWER_ACCESS)
     fun getReviewerResource(): ResourceResponse {
         return ResourceResponse("There is reviewers resource")
     }
 
     @GetMapping("/user")
-    @AccessRole(AccessLevel.USER)
+    @AccessRole(AccessLevel.USER_ACCESS)
     fun getUserResource(): ResourceResponse {
         return ResourceResponse("There is users resource")
     }

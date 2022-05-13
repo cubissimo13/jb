@@ -13,15 +13,15 @@ class AuthorizationInterceptor(private val userRoleCacheService: UserRoleCacheSe
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         val handlerMethod = handler as? HandlerMethod
         val methodAnnotation = handlerMethod?.getMethodAnnotation(AccessRole::class.java)
-        val allowedRole = methodAnnotation?.allowedRole
+        val permission = methodAnnotation?.permission
         val userName = request.getAttribute(USER_NAME_ATR)?.toString()
-        if (allowedRole != null && userName != null) {
+        if (permission != null && userName != null) {
             val userRole = userRoleCacheService.getUserRole(userName)
-            if (userRole.priority > allowedRole.priority) {
+            if (permission.role == userRole.roleName || userRole.priority < permission.priority) {
+                logger.info("User $userName grant access to ${request.servletPath}")
+            } else {
                 logger.info("User $userName not permitted to ${request.servletPath}")
                 response.sendError(HttpServletResponse.SC_FORBIDDEN)
-            } else {
-                logger.info("User $userName grant access to ${request.servletPath}")
             }
         }
         return super.preHandle(request, response, handler)

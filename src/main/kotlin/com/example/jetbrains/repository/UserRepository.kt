@@ -2,6 +2,7 @@ package com.example.jetbrains.repository
 
 import com.example.jetbrains.model.UserModel
 import com.example.jetbrains.model.UserRoleModel
+import com.example.jetbrains.model.enum.UserRole
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
@@ -64,7 +65,7 @@ class UserRepository(private val namedParameterJdbcTemplate: NamedParameterJdbcT
         override fun mapRow(rs: ResultSet, rowNum: Int): UserModel {
             val userRoleModel = UserRoleModel(
                 id = rs.getLong("roleid"),
-                roleName = rs.getString("role_name"),
+                roleName = UserRole.valueOf(rs.getString("role_name")),
                 priority = rs.getInt("priority")
             )
             return UserModel(
