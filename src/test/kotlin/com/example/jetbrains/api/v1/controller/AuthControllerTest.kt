@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @SpringBootTest
@@ -62,21 +63,27 @@ class AuthControllerTest {
             get("/api/v1/internal/admin")
                 .servletPath("/api/v1/internal/admin")
                 .header(AUTH_HEADER_NAME, AUTH_TOKEN_START + jwtResponse.jwtToken)
-        ).andExpect(status().isOk)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().json("{\"message\" : \"There is admins resource! user - 1 ,with role - ADMIN\"}"))
 
         //Resource access reviewer
         mockMvc.perform(
             get("/api/v1/internal/reviewer")
                 .servletPath("/api/v1/internal/reviewer")
                 .header(AUTH_HEADER_NAME, AUTH_TOKEN_START + jwtResponse.jwtToken)
-        ).andExpect(status().isOk)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().json("{\"message\" : \"There is reviewers resource! user - 1 ,with role - ADMIN\"}"))
 
         //Resource access user
         mockMvc.perform(
             get("/api/v1/internal/user")
                 .servletPath("/api/v1/internal/user")
                 .header(AUTH_HEADER_NAME, AUTH_TOKEN_START + jwtResponse.jwtToken)
-        ).andExpect(status().isOk)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().json("{\"message\" : \"There is users resource! user - 1 ,with role - ADMIN\"}"))
 
         //Change password
         mockMvc.perform(
@@ -156,15 +163,18 @@ class AuthControllerTest {
             get("/api/v1/internal/reviewer")
                 .servletPath("/api/v1/internal/reviewer")
                 .header(AUTH_HEADER_NAME, AUTH_TOKEN_START + jwtResponse.jwtToken)
-        ).andExpect(status().isOk)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().json("{\"message\" : \"There is reviewers resource! user - 2 ,with role - REVIEWER\"}"))
 
         //Resource access user
         mockMvc.perform(
             get("/api/v1/internal/user")
                 .servletPath("/api/v1/internal/user")
                 .header(AUTH_HEADER_NAME, AUTH_TOKEN_START + jwtResponse.jwtToken)
-        ).andExpect(status().isOk)
-
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().json("{\"message\" : \"There is users resource! user - 2 ,with role - REVIEWER\"}"))
         //Change password
         mockMvc.perform(
             put("/api/v1/auth/change-password")
@@ -250,7 +260,9 @@ class AuthControllerTest {
             get("/api/v1/internal/user")
                 .servletPath("/api/v1/internal/user")
                 .header(AUTH_HEADER_NAME, AUTH_TOKEN_START + jwtResponse.jwtToken)
-        ).andExpect(status().isOk)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().json("{\"message\" : \"There is users resource! user - 3 ,with role - USER\"}"))
 
         //Change password
         mockMvc.perform(
