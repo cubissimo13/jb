@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 class AuthenticationFilter(private val tokenService: TokenService) : OncePerRequestFilter() {
-    private val anyOneAccessEndpoint = setOf("/api/v1/auth/register", "/api/v1/auth/login")
 
     override fun doFilterInternal(
         request: HttpServletRequest,
@@ -28,6 +27,8 @@ class AuthenticationFilter(private val tokenService: TokenService) : OncePerRequ
     }
 
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
+        val anyOneAccessEndpoint = environment.getRequiredProperty("jetbrains.app.anyone.access")
+            .split(",")
         return anyOneAccessEndpoint.contains(request.servletPath)
             || request.servletPath.startsWith("/swagger-ui")
             || request.servletPath.startsWith("/v3/api-docs")
