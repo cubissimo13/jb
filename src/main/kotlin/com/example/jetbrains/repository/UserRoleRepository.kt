@@ -12,7 +12,12 @@ import java.sql.ResultSet
 @Repository
 class UserRoleRepository(private val namedParameterJdbcTemplate: NamedParameterJdbcTemplate) {
 
+    private val getAllRole = "select * from user_role"
     private val findRole = "select * from user_role where role_name = :name"
+
+    fun getAllRole(): List<UserRoleModel> {
+        return namedParameterJdbcTemplate.query(getAllRole, RoleMapper())
+    }
 
     fun findByRoleName(roleName: String): UserRoleModel? {
         val parameters = MapSqlParameterSource()

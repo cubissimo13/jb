@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"userName\": \"111\",\n    \"password\": \"Password1!\",\n    \"role\": \"REVIEWER\"\n}",
+							"raw": "{\n    \"userName\": \"888\",\n    \"password\": \"Password1!\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -104,6 +104,111 @@
 								"v1",
 								"auth",
 								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user roles",
+			"item": [
+				{
+					"name": "user roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3NzciLCJpYXQiOjE2NTI3ODU2OTcsImV4cCI6MTY1Mjg3MjA5N30.vG7Gmk1no4LFi0_3cH1SfE9Hyl7rfJVT7diX6AK8Biy7_9ScuJ_yM_M9hIwm_tEw_nRjfdc7jGY2m0bvI919nQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/user-management/user-roles",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user-management",
+								"user-roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3NzciLCJpYXQiOjE2NTI3ODU2OTcsImV4cCI6MTY1Mjg3MjA5N30.vG7Gmk1no4LFi0_3cH1SfE9Hyl7rfJVT7diX6AK8Biy7_9ScuJ_yM_M9hIwm_tEw_nRjfdc7jGY2m0bvI919nQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/user-management/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user-management",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3NzciLCJpYXQiOjE2NTI3ODU2OTcsImV4cCI6MTY1Mjg3MjA5N30.vG7Gmk1no4LFi0_3cH1SfE9Hyl7rfJVT7diX6AK8Biy7_9ScuJ_yM_M9hIwm_tEw_nRjfdc7jGY2m0bvI919nQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/user-management/1/change-role?userRole=USER",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user-management",
+								"1",
+								"change-role"
+							],
+							"query": [
+								{
+									"key": "userRole",
+									"value": "USER"
+								}
 							]
 						}
 					},

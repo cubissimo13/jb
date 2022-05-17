@@ -8,8 +8,5 @@ data class RegisterRequest(
     val userName: String,
 
     @ValidPassword
-    val password: String,
-
-    @NotBlank
-    val role: String
+    val password: String
 )

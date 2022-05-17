@@ -1,6 +1,7 @@
 package com.example.jetbrains.api.v1.advice
 
 import com.example.jetbrains.api.v1.payload.response.ErrorResponse
+import com.example.jetbrains.exception.ChangeRoleException
 import com.example.jetbrains.exception.SamePasswordException
 import com.example.jetbrains.exception.UserExistException
 import com.example.jetbrains.exception.UserNotFoundException
@@ -44,6 +45,14 @@ class ExceptionHelper {
         logger.error("${exception.message} ${exception.userName}")
         return ResponseEntity(
             ErrorResponse(status = HttpStatus.BAD_REQUEST.value(), error = "User already exist"), HttpStatus.BAD_REQUEST
+        )
+    }
+
+    @ExceptionHandler(value = [ChangeRoleException::class])
+    fun unauthorizedHandler(exception: ChangeRoleException): ResponseEntity<ErrorResponse> {
+        logger.error("${exception.message} ${exception.userName}")
+        return ResponseEntity(
+            ErrorResponse(status = HttpStatus.BAD_REQUEST.value(), error = "Cant change your own role"), HttpStatus.BAD_REQUEST
         )
     }
 

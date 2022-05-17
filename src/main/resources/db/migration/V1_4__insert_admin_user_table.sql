@@ -1,0 +1,1 @@
+insert into users (user_name, password, role_id) values ('ROOT', '$2a$10$pyznMJnZ96F2HBeo4LlzQOGROKLOpgkn6yCwh9w9PiSNFutNeu2Gy', 1);

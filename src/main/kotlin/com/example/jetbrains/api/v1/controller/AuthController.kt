@@ -19,13 +19,11 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/api/v1/auth")
 class AuthController(val userService: UserService) {
-
     @PostMapping("/register")
     fun registerUser(@Valid @RequestBody registerRequest: RegisterRequest): RegisterResponse {
         return userService.registerUser(
             userName = registerRequest.userName,
-            password = registerRequest.password,
-            role = registerRequest.role
+            password = registerRequest.password
         )
     }
 
